@@ -40,7 +40,10 @@
     "eslint-plugin-jsdoc": "^25.4.1",
     "eslint-plugin-react-hooks": "^4.0.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/stripe": "^7.13.23",
+    "stripe": "^8.63.0"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "npm run build && npm run test && lint-staged"
