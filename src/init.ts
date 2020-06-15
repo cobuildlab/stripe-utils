@@ -24,7 +24,7 @@ export const init = (apiToken: string, config?: Stripe.StripeConfig): void => {
  * 
  * @returns {Function} The decorated function
  */
-export function withStripe <T extends (...args: any[]) => any> (func: T): (...funcArgs: Parameters<T>) => ReturnType<T> {
+export function withStripe <T extends (...args: any[]) => (arg: Stripe) => any> (func: T): (...funcArgs: Parameters<T>) => ReturnType<(arg: Stripe) => any> {
   return  (...args: Parameters<T>): ReturnType<T> => {
     if (!_client) {
       throw new Error(
