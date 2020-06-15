@@ -1,5 +1,3 @@
-import Stripe from 'stripe';
-
 export const customer = {
   id: "cus_HAwLCi6nxPYcsl",
   object: "customer",
@@ -44,4 +42,24 @@ export const customer = {
     has_more: false,
     url: "/v1/customers/cus_HAwLCi6nxPYcsl/tax_ids"
   }
+}
+
+export const subscription = {
+  id: "sub_HShuBFk4JUlAxB",
+  object: "subscription",
+  application_fee_percent: null,
+  billing_cycle_anchor: 1592105228,
+  billing_thresholds: null,
+  cancel_at: null,
+  cancel_at_period_end: false,
+  canceled_at: null,
+  collection_method: "charge_automatically",
+  created: 1592105228,
+  current_period_end: 1594697228,
+  current_period_start: 1592105228,
+  customer: "cus_HSjXVoIShZACUg",
+  days_until_due: null,
+  default_payment_method: null,
+  default_source: null,
+  default_tax_rates: [],
 }
