@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "@cobuildlab/stripe-utils",
   "version": "0.0.1",
   "description": "<TODO>",
   "main": "lib/index.js",
