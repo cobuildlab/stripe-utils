@@ -26,8 +26,8 @@ export const init = (apiToken: string, config?: Stripe.StripeConfig): void => {
  * 
  * @returns {Function} The decorated function
  */
-export function withStripe <T extends (...args: any[]) => any> (func: T): (...funcArgs: Parameters<OmitFirstArg<T>>) => any {
-  return (...args: Parameters<OmitFirstArg<T>>): any => {
+export function withStripe <T extends (stipe: Stripe, ...args: any[]) => any> (func: T): (...funcArgs: Parameters<OmitFirstArg<T>>) => ReturnType<T> {
+  return (...args: Parameters<OmitFirstArg<T>>): ReturnType<T> => {
     if (!_client) {
       throw new Error(
         'Stripe instance not initialized, please execute "init" function first'

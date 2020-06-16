@@ -1,7 +1,6 @@
 import Stripe from 'stripe';
 import { withStripe } from './init';
 import { createCustomer } from './customers';
-const { log, error } = require('@cobuildlab/pure-logger');
 
 /**
  * Create a stripe subscription for a company.
@@ -18,8 +17,6 @@ export const createSubscription = withStripe(async (stripe: Stripe, customerId: 
     items: [{ plan: planId }],
   };
 
-  log('createSubscription data', JSON.stringify(subscriptionData, null, 2));
-
   let subscription = null;
 
   try {
@@ -28,8 +25,6 @@ export const createSubscription = withStripe(async (stripe: Stripe, customerId: 
   
   } catch (e) {
   
-    error('createSubscription Error: ', JSON.stringify(e, null, 2));
-
     throw e;
   }
 

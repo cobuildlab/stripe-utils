@@ -41,7 +41,6 @@
     "eslint-plugin-react-hooks": "^4.0.2"
   },
   "dependencies": {
-    "@cobuildlab/pure-logger": "0.0.4",
     "@types/stripe": "^7.13.23",
     "stripe": "^8.63.0"
   },
