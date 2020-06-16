@@ -4,7 +4,7 @@ import * as stripe from '../init';
 
 describe('Initialization', () => {
   test('Throws error with not initialization', () => {
-    const func = stripe.withStripe(() => (stripe: Stripe) => stripe);
+    const func = stripe.withStripe((stripe: Stripe) => stripe);
 
 
     expect(func).toThrowError('Stripe instance not initialized, please execute "init" function first');
@@ -16,7 +16,7 @@ describe('Initialization', () => {
 
     stripe.init(testKey);
 
-    const func = stripe.withStripe(() => (stripe: Stripe) => stripe);
+    const func = stripe.withStripe((stripe: Stripe) => stripe);
 
     expect(func()).toHaveProperty(
       '_api.auth',

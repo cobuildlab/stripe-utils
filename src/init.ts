@@ -2,6 +2,8 @@ import Stripe from 'stripe';
 
 let _client: Stripe | null = null;
 
+type OmitFirstArg<F> = F extends (x: any, ...args: infer P) => infer R ? (...args: P) => R : never;
+
 /**
  * Initializes the stripe object
  * 
@@ -18,20 +20,20 @@ export const init = (apiToken: string, config?: Stripe.StripeConfig): void => {
 };
 
 /**
- * Injects the stripe object into a function
+ * Passes the stripe object into a function
  * 
  * @param {Function} func - The function to decorate
  * 
  * @returns {Function} The decorated function
  */
-export function withStripe <T extends (...args: any[]) => (arg: Stripe) => any> (func: T): (...funcArgs: Parameters<T>) => ReturnType<(arg: Stripe) => any> {
-  return  (...args: Parameters<T>): ReturnType<T> => {
+export function withStripe <T extends (...args: any[]) => any> (func: T): (...funcArgs: Parameters<OmitFirstArg<T>>) => any {
+  return (...args: Parameters<OmitFirstArg<T>>): any => {
     if (!_client) {
       throw new Error(
         'Stripe instance not initialized, please execute "init" function first'
       );
     }
 
-    return func(...args)(_client);
+    return func(_client, ...args);
   }
 };

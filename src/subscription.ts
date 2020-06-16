@@ -6,44 +6,43 @@ const { log, error } = require('@cobuildlab/pure-logger');
 /**
  * Create a stripe subscription for a company.
  *
- * @param  {string}  customerId - The Customer id.
- * @param  {string}  planId - The Plan id.
+ * @param {Stripe} stripe - The stripe object
+ * @param {string} customerId - The Customer id.
+ * @param {string} planId - The Plan id.
  * 
- * @returns {Promise} The subsctription.
+ * @returns {Promise<Stripe.Subscription>} The created subsctription object.
  */
-export const createSubscription = withStripe((customerId: string, planId: string) => {
-  return async (stripe: Stripe) => {
-    const subscriptionData: Stripe.SubscriptionCreateParams = {
-      customer: customerId,
-      items: [{ plan: planId }],
-    };
+export const createSubscription = withStripe(async (stripe: Stripe, customerId: string, planId: string): Promise<Stripe.Subscription> => {
+  const subscriptionData: Stripe.SubscriptionCreateParams = {
+    customer: customerId,
+    items: [{ plan: planId }],
+  };
+
+  log('createSubscription data', JSON.stringify(subscriptionData, null, 2));
+
+  let subscription = null;
+
+  try {
   
-    log('createSubscription data', JSON.stringify(subscriptionData, null, 2));
-
-    let subscription = null;
-
-    try {
-    
-      subscription = await stripe.subscriptions.create(subscriptionData);
-    
-    } catch (e) {
-    
-      error('createSubscription Error: ', JSON.stringify(e, null, 2));
-
-      throw e;
-    }
+    subscription = await stripe.subscriptions.create(subscriptionData);
   
-    return subscription;
+  } catch (e) {
+  
+    error('createSubscription Error: ', JSON.stringify(e, null, 2));
+
+    throw e;
   }
+
+  return subscription;
 });
 
 /**
  * Creates a stripe customer & subscription for a company.
  *
- * @param  {string} stripePaymentMethodId - Stripe payment method id.
- * @param  {string} stripePlanId - Stripe Plan id.
- * @param  {string} companyName - The company name.
- * @param  {string} email - User email.
+ * @param {string} stripePaymentMethodId - Stripe payment method id.
+ * @param {string} stripePlanId - Stripe Plan id.
+ * @param {string} companyName - The company name.
+ * @param {string} email - User email.
  * 
  * @returns {Promise} The subscription. // Can throw and Error //.
  */
