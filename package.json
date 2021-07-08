@@ -41,7 +41,7 @@
     "eslint-plugin-react-hooks": "^4.0.2"
   },
   "dependencies": {
-    "@types/stripe": "^7.13.23",
+    "@types/stripe": "^7.13.25",
     "stripe": "^8.63.0"
   },
   "husky": {
