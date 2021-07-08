@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@types/stripe": "^7.13.23",
-    "stripe": "^8.63.0"
+    "stripe": "^8.155.0"
   },
   "husky": {
     "hooks": {
